@@ -1,0 +1,35 @@
+.genre-select {
+	display: inline-flex;
+	align-items: center;
+	list-style-type: none;
+	padding: 0;
+	gap: 30px;
+	border-bottom: 3px solid #000;
+
+	&__item {
+		position: relative;
+	}
+
+	&__button {
+		background: none;
+		border: none;
+		padding: 0;
+		text-transform: uppercase;
+		font-weight: 500;
+		cursor: pointer;
+		padding-bottom: 20px;
+
+		&:hover {
+			color: #808080;
+		}
+
+		&--selected::before {
+			content: "";
+			display: block;
+			inset: auto 0 -3px 0;
+			height: 3px;
+			background-color: #f65261;
+			position: absolute;
+		}
+	}
+}

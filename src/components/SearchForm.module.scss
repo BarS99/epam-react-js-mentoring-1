@@ -1,0 +1,33 @@
+.search-form {
+	display: inline-flex;
+	height: 56px;
+	width: 974px;
+	max-width: 100%;
+	gap: 14px;
+
+	&__input {
+		flex-grow: 1;
+		background-color: rgba(51, 51, 51, 0.8);
+		padding: 0 20px;
+		border: none;
+		border-radius: 8px;
+		font-size: 20px;
+		color: #fff;
+	}
+
+	&__button {
+		width: 233px;
+		border: none;
+		border-radius: 8px;
+		background-color: #f65261;
+		text-transform: uppercase;
+		color: #fff;
+		font-size: 20px;
+		cursor: pointer;
+		border: 2px solid #f65261;
+
+		&:hover {
+			border-color: #000;
+		}
+	}
+}
