@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Component } from "react";
+import styles from "./App.module.scss";
+import Counter from "./components/Counter";
+import GenreSelect from "./components/GenreSelect";
+import SearchForm from "./components/SearchForm";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface AppState {
+	selectedGenre: string | null;
+}
+
+class App extends Component<{}, AppState> {
+	state: AppState = {
+		selectedGenre: null,
+	};
+
+	handleOnSearch = (value: string): void => {
+		console.log(`Search query: ${value}`);
+	};
+
+	handleOnSelect = (value: string): void => {
+		this.setState(() => ({
+			selectedGenre: value,
+		}));
+	};
+
+	render() {
+		const initialSearchQuery = "initial search query";
+		const genres = ["action", "drama", "romance", "horror", "thriller"];
+
+		return (
+			<div className={styles.app}>
+				<Counter />
+				<SearchForm
+					initSearchQuery={initialSearchQuery}
+					onSearch={this.handleOnSearch}
+				/>
+				<GenreSelect
+					genres={genres}
+					selectedGenre={this.state.selectedGenre}
+					onSelect={this.handleOnSelect}
+				/>
+			</div>
+		);
+	}
 }
 
 export default App;
