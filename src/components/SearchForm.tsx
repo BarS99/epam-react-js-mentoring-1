@@ -18,30 +18,37 @@ export default class SearchForm extends Component<
 		value: this.props.initSearchQuery,
 	};
 
-	handleOnChange = (value: string): void => {
-		this.setState(() => ({
-			value,
-		}));
-	};
+	form: HTMLFormElement | null = null;
 
 	handleCallback = (e: React.FormEvent): void => {
 		e.preventDefault();
 		this.props.onSearch(this.state.value);
 	};
 
-	render() {
-		const placeholder = "What do you want to watch?";
+	handleKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === "Enter") {
+			e.preventDefault();
+			this.form?.submit();
+		}
+	};
 
+	render() {
 		return (
 			<form
+				ref={(form) => (this.form = form)}
 				className={styles["search-form"]}
 				onSubmit={this.handleCallback}
 			>
 				<input
 					className={styles["search-form__input"]}
 					value={this.state.value}
-					onChange={(e) => this.handleOnChange(e.target.value)}
-					placeholder={placeholder}
+					onChange={(e) =>
+						this.setState({
+							value: e.target.value,
+						})
+					}
+					onKeyDown={(e) => this.handleKeyDown(e)}
+					placeholder="What do you want to watch?"
 				/>
 				<button type="submit" className={styles["search-form__button"]}>
 					Search

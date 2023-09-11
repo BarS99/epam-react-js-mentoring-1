@@ -27,6 +27,7 @@ export default class GenreSelect extends Component<GenreSelectProps> {
 							className={this.getButtonClasses(genre)}
 							onClick={(e) => this.props.onSelect(genre)}
 							type="button"
+							title={`Select ${genre} genre`}
 						>
 							{genre}
 						</button>

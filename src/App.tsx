@@ -18,9 +18,9 @@ class App extends Component<{}, AppState> {
 	};
 
 	handleOnSelect = (value: string): void => {
-		this.setState(() => ({
+		this.setState({
 			selectedGenre: value,
-		}));
+		});
 	};
 
 	render() {
@@ -29,7 +29,7 @@ class App extends Component<{}, AppState> {
 
 		return (
 			<div className={styles.app}>
-				<Counter />
+				<Counter initialValue={0} />
 				<SearchForm
 					initSearchQuery={initialSearchQuery}
 					onSearch={this.handleOnSearch}
