@@ -5,8 +5,8 @@ interface Props {
 	initialValue: number;
 }
 
-const Counter = (props: Props) => {
-	const [value, setValue] = useState<number>(props.initialValue);
+const Counter = ({ initialValue }: Props) => {
+	const [value, setValue] = useState<number>(initialValue);
 
 	const decrementValue = (): void => {
 		setValue((value) => value - 1);

@@ -1,0 +1,48 @@
+@use "../assets/css/variables.module.scss" as variables;
+
+.sort-control {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+
+	&__label {
+		color: rgba(variables.$text, 0.6);
+		text-transform: uppercase;
+	}
+
+	&__select {
+		color: variables.$text;
+		background-color: transparent;
+		border: none;
+		text-transform: uppercase;
+		appearance: none;
+		padding-right: 3rem;
+	}
+
+	&__option {
+		background-color: variables.$bg;
+	}
+
+	&__select-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		position: relative;
+
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 0;
+			height: 0;
+			border-left: 0.4rem solid transparent;
+			border-right: 0.4rem solid transparent;
+			border-top: 0.4rem solid variables.$primary;
+			border-radius: 0.25rem;
+			pointer-events: none;
+		}
+	}
+}

@@ -1,0 +1,86 @@
+@use "../assets/css/variables.module.scss" as variables;
+
+.movie-details {
+	display: flex;
+	width: 100%;
+	gap: 3.25rem;
+
+	&--column {
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	&__image {
+		align-self: flex-start;
+		display: block;
+		width: 20rem;
+		max-width: 40%;
+		aspect-ratio: 322 / 455;
+	}
+
+	&--column &__image {
+		max-width: 100%;
+		margin-inline: auto;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		gap: 2rem;
+	}
+
+	&__top {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		gap: 0.25rem;
+	}
+
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	&__name {
+		font-size: 2.5rem;
+		letter-spacing: 1px;
+		font-weight: 300;
+		text-transform: uppercase;
+	}
+
+	&__rating {
+		width: 3.75rem;
+		height: 3.75rem;
+		border: 1px solid variables.$text;
+		font-size: 1.25rem;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 300;
+		flex-shrink: 0;
+	}
+
+	&__genres {
+		font-size: 0.875rem;
+		font-weight: 500;
+		color: rgba(variables.$text, 0.5);
+	}
+
+	&__info {
+		display: flex;
+		align-items: center;
+		gap: 3.125rem;
+		color: variables.$primary;
+		font-size: 1.5rem;
+		font-weight: 300;
+	}
+
+	&__description {
+		font-size: 1.25rem;
+		font-weight: 300;
+		color: rgba(variables.$text, 0.5);
+	}
+}

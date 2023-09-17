@@ -6,24 +6,18 @@ interface Props {
 	onSelect: (genre: string) => void;
 }
 
-const GenreSelect = (props: Props) => {
-	const getButtonClasses = (genre: string): string => {
-		const classes = [styles["genre-select__button"]];
-
-		if (genre === props.selectedGenre) {
-			classes.push(styles["genre-select__button--selected"]);
-		}
-
-		return classes.join(" ");
-	};
-
+const GenreSelect = ({ genres, selectedGenre, onSelect }: Props) => {
 	return (
 		<ul className={styles["genre-select"]}>
-			{props.genres.map((genre) => (
+			{genres.map((genre) => (
 				<li className={styles["genre-select__item"]} key={genre}>
 					<button
-						className={getButtonClasses(genre)}
-						onClick={(e) => props.onSelect(genre)}
+						className={[
+							styles["genre-select__button"],
+							genre === selectedGenre &&
+								styles["genre-select__button--selected"],
+						].join(" ")}
+						onClick={() => onSelect(genre)}
 						type="button"
 						data-testid={`genre-${genre}`}
 					>

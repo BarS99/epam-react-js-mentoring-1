@@ -6,19 +6,21 @@ interface Props {
 	onSearch: (value: string) => void;
 }
 
-const SearchForm = (props: Props) => {
-	const [value, setValue] = useState<string>(props.initSearchQuery);
+const SearchForm = ({ initSearchQuery, onSearch }: Props) => {
+	const [value, setValue] = useState<string>(initSearchQuery);
 	const formRef = useRef<HTMLFormElement>(null);
 
 	const handleCallback = (e: React.FormEvent): void => {
 		e.preventDefault();
-		props.onSearch(value);
+		onSearch(value);
 	};
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === "Enter") {
 			e.preventDefault();
-			formRef.current?.submit();
+			formRef.current?.dispatchEvent(
+				new Event("submit", { bubbles: true })
+			);
 		}
 	};
 
@@ -33,6 +35,7 @@ const SearchForm = (props: Props) => {
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 				onKeyDown={(e) => handleKeyDown(e)}
+				placeholder="Search..."
 				data-testid="input"
 			/>
 			<button
