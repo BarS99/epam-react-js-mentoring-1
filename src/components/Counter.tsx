@@ -1,13 +1,20 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import styles from "./Counter.module.scss";
+
+interface CounterStateProps {
+	initialValue: number;
+}
 
 interface CounterState {
 	value: number;
 }
 
-export default class Counter extends Component<{}, CounterState> {
+export default class Counter extends Component<
+	CounterStateProps,
+	CounterState
+> {
 	state: CounterState = {
-		value: 0,
+		value: this.props.initialValue,
 	};
 
 	decrementValue = (): void => {
@@ -25,36 +32,33 @@ export default class Counter extends Component<{}, CounterState> {
 	};
 
 	render() {
-		return React.createElement(
-			"div",
-			{
-				className: styles.counter,
-			},
-			[
-				React.createElement(
-					"button",
-					{
-						key: "counter-decrement",
-						className: styles.counter__button,
-						onClick: this.decrementValue,
-					},
-					"Decrement"
-				),
-				React.createElement(
-					"p",
-					{ key: "counter-value", className: styles.counter__value },
-					this.state.value
-				),
-				React.createElement(
-					"button",
-					{
-						key: "counter-increment",
-						className: styles.counter__button,
-						onClick: this.incrementValue,
-					},
-					"Increment"
-				),
-			]
+		return (
+			<div className={styles.counter}>
+				<button
+					type="button"
+					key="counter-decrement"
+					className={styles.counter__button}
+					onClick={this.decrementValue}
+				>
+					Decrement
+				</button>
+				<input
+					key="counter-value"
+					className={styles.counter__value}
+					value={this.state.value}
+					readOnly={true}
+					title="Counter value"
+					onChange={(e) => e.preventDefault()}
+				/>
+				<button
+					type="button"
+					key="counter-increment"
+					className={styles.counter__button}
+					onClick={this.incrementValue}
+				>
+					Increment
+				</button>
+			</div>
 		);
 	}
 }
