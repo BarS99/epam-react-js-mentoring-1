@@ -1,64 +1,51 @@
-import { Component } from "react";
+import { useState } from "react";
 import styles from "./Counter.module.scss";
 
-interface CounterStateProps {
+interface Props {
 	initialValue: number;
 }
 
-interface CounterState {
-	value: number;
-}
+const Counter = (props: Props) => {
+	const [value, setValue] = useState<number>(props.initialValue);
 
-export default class Counter extends Component<
-	CounterStateProps,
-	CounterState
-> {
-	state: CounterState = {
-		value: this.props.initialValue,
+	const decrementValue = (): void => {
+		setValue((value) => value - 1);
 	};
 
-	decrementValue = (): void => {
-		this.changeValue(-1);
+	const incrementValue = (): void => {
+		setValue((value) => value + 1);
 	};
 
-	incrementValue = (): void => {
-		this.changeValue(1);
-	};
+	return (
+		<div className={styles.counter}>
+			<button
+				type="button"
+				key="counter-decrement"
+				className={styles.counter__button}
+				onClick={decrementValue}
+				data-testid="counter-decrement"
+			>
+				Decrement
+			</button>
+			<input
+				key="counter-value"
+				className={styles.counter__value}
+				value={value}
+				readOnly={true}
+				onChange={(e) => e.preventDefault()}
+				data-testid="counter-value"
+			/>
+			<button
+				type="button"
+				key="counter-increment"
+				className={styles.counter__button}
+				onClick={incrementValue}
+				data-testid="counter-increment"
+			>
+				Increment
+			</button>
+		</div>
+	);
+};
 
-	changeValue = (diff: number): void => {
-		this.setState((state) => ({
-			value: state.value + diff,
-		}));
-	};
-
-	render() {
-		return (
-			<div className={styles.counter}>
-				<button
-					type="button"
-					key="counter-decrement"
-					className={styles.counter__button}
-					onClick={this.decrementValue}
-				>
-					Decrement
-				</button>
-				<input
-					key="counter-value"
-					className={styles.counter__value}
-					value={this.state.value}
-					readOnly={true}
-					title="Counter value"
-					onChange={(e) => e.preventDefault()}
-				/>
-				<button
-					type="button"
-					key="counter-increment"
-					className={styles.counter__button}
-					onClick={this.incrementValue}
-				>
-					Increment
-				</button>
-			</div>
-		);
-	}
-}
+export default Counter;
