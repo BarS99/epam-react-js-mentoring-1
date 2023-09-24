@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import styles from "./SearchForm.module.scss";
+import Button from "./Button";
 
 interface Props {
 	initSearchQuery: string;
@@ -29,6 +30,7 @@ const SearchForm = ({ initSearchQuery, onSearch }: Props) => {
 			ref={formRef}
 			className={styles["search-form"]}
 			onSubmit={handleCallback}
+			data-testid="form"
 		>
 			<input
 				className={styles["search-form__input"]}
@@ -38,13 +40,7 @@ const SearchForm = ({ initSearchQuery, onSearch }: Props) => {
 				placeholder="Search..."
 				data-testid="input"
 			/>
-			<button
-				type="submit"
-				className={styles["search-form__button"]}
-				data-testid="submit"
-			>
-				Search
-			</button>
+			<Button type="submit">Search</Button>
 		</form>
 	);
 };

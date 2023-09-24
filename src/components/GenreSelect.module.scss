@@ -5,8 +5,8 @@
 	align-items: center;
 	list-style-type: none;
 	padding: 0;
-	gap: 30px;
-	border-bottom: 3px solid variables.$secondary;
+	gap: 1.875rem;
+	border-bottom: 0.1875rem solid variables.$secondary;
 
 	&__item {
 		position: relative;
@@ -19,7 +19,7 @@
 		text-transform: uppercase;
 		font-weight: 500;
 		cursor: pointer;
-		padding-bottom: 20px;
+		padding-bottom: 1.25rem;
 
 		&:hover {
 			color: #808080;
@@ -28,8 +28,8 @@
 		&--selected::before {
 			content: "";
 			display: block;
-			inset: auto 0 -3px 0;
-			height: 3px;
+			inset: auto 0 -0.1875rem 0;
+			height: 0.1875rem;
 			background-color: variables.$primary;
 			position: absolute;
 		}

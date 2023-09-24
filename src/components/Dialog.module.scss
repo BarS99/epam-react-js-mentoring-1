@@ -1,0 +1,70 @@
+@use "../assets/css/variables.module.scss" as variables;
+
+.dialog {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	pointer-events: none;
+
+	& > div {
+		max-height: 100%;
+		overflow-y: auto;
+		padding-top: 3.75rem;
+		padding-bottom: 3.75rem;
+	}
+
+	&__backdrop {
+		position: fixed;
+		inset: 0;
+		background-color: variables.$bg;
+		opacity: 0.92;
+		z-index: 1000;
+	}
+
+	&__window {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		gap: 2.25rem;
+		position: relative;
+		background-color: variables.$bg;
+		padding: 3.75rem;
+		box-shadow: variables.$box-shadow;
+		pointer-events: initial;
+	}
+
+	&__close {
+		position: absolute;
+		background: transparent;
+		border: none;
+		padding: 0;
+		top: 1.75rem;
+		right: 1.75rem;
+		width: 1.375rem;
+		height: 1.375rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+
+		&::before {
+			content: "X";
+			font-size: 1.5rem;
+		}
+	}
+
+	&__title {
+		font-size: 2.5rem;
+		text-transform: uppercase;
+		letter-spacing: 0.0625rem;
+		font-weight: 300;
+	}
+
+	&__body {
+		font-size: 1.25rem;
+		line-height: 1.5;
+	}
+}

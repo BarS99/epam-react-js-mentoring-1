@@ -1,5 +1,12 @@
 $primary: #f65261;
 $secondary: #424242;
 $tertiary: #555555;
+$dark: #323232;
 $bg: #232323;
+$black: #000000;
 $text: #ffffff;
+$box-shadow:
+	0 0.625rem 3.125rem 0 rgba($black, 0.051),
+	0 0.625rem 1.25rem 0 rgba($black, 0.051),
+	0 0.125rem 0.625rem 0 rgba($black, 0.071),
+	0 0 0.125rem 0 rgba($black, 0.102);

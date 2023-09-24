@@ -1,0 +1,135 @@
+@use "../assets/css/variables.module.scss" as variables;
+
+.movie-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.875rem;
+	width: 100%;
+
+	&__content {
+		display: grid;
+		grid-template-columns: 61fr 39fr;
+		gap: 1.875rem;
+	}
+
+	&__cell:last-child {
+		grid-column: span 2;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		text-transform: uppercase;
+		color: variables.$primary;
+		letter-spacing: 0.0625rem;
+	}
+
+	&__input {
+		height: 56px;
+		border: none;
+		background-color: rgba(variables.$dark, 0.95);
+		margin-top: 0.75rem;
+		color: variables.$text;
+		padding: 1rem;
+		font-size: 1.25rem;
+		appearance: none;
+		width: 100%;
+
+		&::-webkit-calendar-picker-indicator {
+			background-image: url("../assets/images/calendar.svg");
+			background-size: cover;
+		}
+	}
+
+	&__select &__input {
+		padding-right: 3rem;
+		cursor: pointer;
+	}
+
+	&__select {
+		position: relative;
+
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			right: 1rem;
+			top: 50%;
+			transform: translateY(calc(-50% + 0.4rem));
+			width: 0;
+			height: 0;
+			border-left: 0.65rem solid transparent;
+			border-right: 0.65rem solid transparent;
+			border-top: 0.65rem solid #f65261;
+			border-radius: 0.25rem;
+			pointer-events: none;
+		}
+
+		&--active::after {
+			transform: translateY(calc(-50% + 0.4rem)) scaleY(-1);
+		}
+	}
+
+	&__select-dropdown {
+		display: flex;
+		position: absolute;
+		inset: 100% 0 auto 0;
+		padding: 1rem;
+		flex-direction: column;
+		gap: 1rem;
+		background-color: rgba(variables.$bg, 0.92);
+		box-shadow: variables.$box-shadow;
+		color: variables.$text;
+		max-height: 12rem;
+		overflow-y: auto;
+	}
+
+	&__select-value {
+		display: flex;
+		align-items: center;
+		position: relative;
+	}
+
+	&__checkbox {
+		opacity: 0;
+		margin: 0;
+		width: 1rem;
+		cursor: pointer;
+
+		&-label {
+			display: block;
+			flex-grow: 1;
+			padding-left: 0.5rem;
+			cursor: pointer;
+		}
+
+		&-icon {
+			content: "";
+			display: block;
+			width: 1rem;
+			height: 1rem;
+			background-image: url("../assets/images/checkbox-empty.svg");
+			background-size: cover;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			pointer-events: none;
+		}
+
+		&:checked ~ &-icon {
+			background-image: url("../assets/images/checkbox.svg");
+		}
+	}
+
+	&__textarea {
+		min-height: 12.25rem;
+		width: 100%;
+		max-width: 100%;
+	}
+
+	&__footer {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.75rem;
+	}
+}
