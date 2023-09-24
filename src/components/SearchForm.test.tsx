@@ -4,13 +4,9 @@ import SearchForm from "./SearchForm";
 test("should render an input with initial value provided in props", () => {
 	render(<SearchForm initSearchQuery={"init value"} onSearch={() => {}} />);
 
-	expect(
-		(
-			screen.getByPlaceholderText(
-				"What do you want to watch?"
-			) as HTMLInputElement
-		).value
-	).toEqual("init value");
+	expect((screen.getByTestId("input") as HTMLInputElement).value).toEqual(
+		"init value"
+	);
 });
 
 test("should call onChange prop with a new value after typing to the input and clicking the submit button", () => {
@@ -19,15 +15,10 @@ test("should call onChange prop with a new value after typing to the input and c
 		<SearchForm initSearchQuery={"init value"} onSearch={onSearchStub} />
 	);
 
-	fireEvent.change(
-		screen.getByPlaceholderText(
-			"What do you want to watch?"
-		) as HTMLInputElement,
-		{
-			target: { value: "new value" },
-		}
-	);
-	fireEvent.click(screen.getByText("Search") as HTMLButtonElement);
+	fireEvent.change(screen.getByTestId("input") as HTMLInputElement, {
+		target: { value: "new value" },
+	});
+	fireEvent.click(screen.getByTestId("submit") as HTMLButtonElement);
 
 	expect(onSearchStub).toHaveBeenCalledWith("new value");
 });
@@ -37,9 +28,7 @@ test("should call onChange prop with a new value after typing to the input and c
 	render(
 		<SearchForm initSearchQuery={"init value"} onSearch={onSearchStub} />
 	);
-	const inputElement = screen.getByPlaceholderText(
-		"What do you want to watch?"
-	) as HTMLInputElement;
+	const inputElement = screen.getByTestId("input") as HTMLInputElement;
 
 	fireEvent.change(inputElement, {
 		target: { value: "new value" },

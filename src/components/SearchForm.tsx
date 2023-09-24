@@ -1,59 +1,52 @@
-import { Component } from "react";
+import { useRef, useState } from "react";
 import styles from "./SearchForm.module.scss";
 
-interface SearchFormProps {
+interface Props {
 	initSearchQuery: string;
 	onSearch: (value: string) => void;
 }
 
-interface SearchFormState {
-	value: string;
-}
+const SearchForm = ({ initSearchQuery, onSearch }: Props) => {
+	const [value, setValue] = useState<string>(initSearchQuery);
+	const formRef = useRef<HTMLFormElement>(null);
 
-export default class SearchForm extends Component<
-	SearchFormProps,
-	SearchFormState
-> {
-	state: SearchFormState = {
-		value: this.props.initSearchQuery,
-	};
-
-	form: HTMLFormElement | null = null;
-
-	handleCallback = (e: React.FormEvent): void => {
+	const handleCallback = (e: React.FormEvent): void => {
 		e.preventDefault();
-		this.props.onSearch(this.state.value);
+		onSearch(value);
 	};
 
-	handleKeyDown = (e: React.KeyboardEvent) => {
+	const handleKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === "Enter") {
 			e.preventDefault();
-			this.form?.submit();
+			formRef.current?.dispatchEvent(
+				new Event("submit", { bubbles: true })
+			);
 		}
 	};
 
-	render() {
-		return (
-			<form
-				ref={(form) => (this.form = form)}
-				className={styles["search-form"]}
-				onSubmit={this.handleCallback}
+	return (
+		<form
+			ref={formRef}
+			className={styles["search-form"]}
+			onSubmit={handleCallback}
+		>
+			<input
+				className={styles["search-form__input"]}
+				value={value}
+				onChange={(e) => setValue(e.target.value)}
+				onKeyDown={(e) => handleKeyDown(e)}
+				placeholder="Search..."
+				data-testid="input"
+			/>
+			<button
+				type="submit"
+				className={styles["search-form__button"]}
+				data-testid="submit"
 			>
-				<input
-					className={styles["search-form__input"]}
-					value={this.state.value}
-					onChange={(e) =>
-						this.setState({
-							value: e.target.value,
-						})
-					}
-					onKeyDown={(e) => this.handleKeyDown(e)}
-					placeholder="What do you want to watch?"
-				/>
-				<button type="submit" className={styles["search-form__button"]}>
-					Search
-				</button>
-			</form>
-		);
-	}
-}
+				Search
+			</button>
+		</form>
+	);
+};
+
+export default SearchForm;

@@ -16,7 +16,7 @@ test("should render all genres passed in props", () => {
 		/>
 	);
 
-	const genreItems = screen.getAllByTitle(/Select(.*) genre/i);
+	const genreItems = screen.getAllByTestId(/genre-(.*)/i);
 
 	expect(
 		genreItems.every((item) => genres.includes(item.textContent as string))
@@ -37,9 +37,7 @@ test("should highlight a selected genre passed in props", () => {
 
 	expect(
 		(
-			screen.getByTitle(
-				`Select ${actionGenre} genre`
-			) as HTMLButtonElement
+			screen.getByTestId(`genre-${actionGenre}`) as HTMLButtonElement
 		).classList.contains("genre-select__button--selected")
 	).toBe(true);
 });
@@ -56,7 +54,7 @@ test("should call onSelect with proper arguments after button click event", () =
 	);
 
 	fireEvent.click(
-		screen.getByTitle(`Select ${actionGenre} genre`) as HTMLButtonElement
+		screen.getByTestId(`genre-${actionGenre}`) as HTMLButtonElement
 	);
 
 	expect(onSelectStub).toHaveBeenCalledWith(actionGenre);
