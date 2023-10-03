@@ -45,7 +45,7 @@
 
 	&__name {
 		font-size: 2.5rem;
-		letter-spacing: 1px;
+		letter-spacing: 0.0625rem;
 		font-weight: 300;
 		text-transform: uppercase;
 	}
@@ -53,7 +53,7 @@
 	&__rating {
 		width: 3.75rem;
 		height: 3.75rem;
-		border: 1px solid variables.$text;
+		border: 0.0625rem solid variables.$text;
 		font-size: 1.25rem;
 		border-radius: 50%;
 		display: flex;

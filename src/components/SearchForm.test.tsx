@@ -18,7 +18,7 @@ test("should call onChange prop with a new value after typing to the input and c
 	fireEvent.change(screen.getByTestId("input") as HTMLInputElement, {
 		target: { value: "new value" },
 	});
-	fireEvent.click(screen.getByTestId("submit") as HTMLButtonElement);
+	fireEvent.submit(screen.getByTestId("form") as HTMLButtonElement);
 
 	expect(onSearchStub).toHaveBeenCalledWith("new value");
 });

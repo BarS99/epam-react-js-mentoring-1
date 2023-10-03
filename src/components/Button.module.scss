@@ -1,0 +1,22 @@
+@use "../assets/css/variables.module.scss" as variables;
+
+.button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 0.5rem;
+	background-color: variables.$primary;
+	text-transform: uppercase;
+	color: variables.$text;
+	font-size: 1.25rem;
+	line-height: 1.2;
+	padding: 0.9375rem 2.375rem; 
+	cursor: pointer;
+	border: 0.0625rem solid variables.$primary;
+	min-width: 11.25rem;
+
+	&--secondary {
+		background-color: transparent;
+		color: variables.$primary;
+	}
+}
