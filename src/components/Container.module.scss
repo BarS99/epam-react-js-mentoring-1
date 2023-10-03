@@ -1,4 +1,12 @@
+@use "../assets/css/variables.module.scss" as variables;
+
 .container {
 	width: 100%;
-	padding-inline: 3.75rem;
+	padding-inline: 2rem;
+	max-width: 1084px;
+	margin: 0 auto;
+
+	@media screen and (min-width: variables.$breakpoint) {
+		padding-inline: 3.75rem;
+	}
 }

@@ -84,10 +84,6 @@ video {
 	background: transparent;
 }
 
-body {
-	line-height: 1;
-}
-
 article,
 aside,
 details,
@@ -172,6 +168,15 @@ select {
 	vertical-align: middle;
 }
 
+strong,
+b {
+	font-weight: 700;
+}
+
+button {
+	cursor: pointer;
+}
+
 * {
 	font-family: inherit;
 	font-size: 1rem;
@@ -184,4 +189,11 @@ html {
 	font-family: "Montserrat", sans-serif;
 	background-color: variables.$bg;
 	color: variables.$text;
+	overflow: hidden;
+}
+
+body {
+	height: 100vh;
+	line-height: 1;
+	overflow-y: auto;
 }

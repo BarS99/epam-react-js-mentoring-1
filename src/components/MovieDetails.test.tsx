@@ -1,41 +1,40 @@
 import { render, screen } from "@testing-library/react";
 import MovieDetails from "./MovieDetails";
+import { MovieDetailsData } from "../interfaces/movie.interface";
 
 const propsData = {
-	image: {
-		url: "image-url",
-		altText: "image-alt",
-	},
-	name: "Pulp Fiction",
-	year: 2004,
-	rating: 8.9,
-	duration: "2h 34min",
+	poster_path: "image-url",
+	title: "Pulp Fiction",
+	release_date: "2004",
+	vote_average: 8.9,
+	runtime: 123,
 	genres: ["action", "crime"],
-	description: "Pulp Fiction Description",
-};
+	overview: "Pulp Fiction Description",
+	id: 1,
+} as MovieDetailsData;
 
 test("should render the component with given data", () => {
 	render(<MovieDetails data={propsData} orientation="row" />);
 
 	const image = screen.getByTestId("image");
 
-	expect(image).toHaveAttribute("src", propsData.image.url);
-	expect(image).toHaveAttribute("alt", propsData.image.altText);
-	expect(screen.getByTestId("name")).toHaveTextContent(propsData.name);
-	expect(screen.getByTestId("year")).toHaveTextContent(
-		String(propsData.year)
+	expect(image).toHaveAttribute("src", propsData.poster_path);
+	expect(image).toHaveAttribute("alt", propsData.title);
+	expect(screen.getByTestId("name")).toHaveTextContent(propsData.title);
+	expect(screen.getByTestId("release_date")).toHaveTextContent(
+		String(propsData.release_date)
 	);
 	expect(screen.getByTestId("rating")).toHaveTextContent(
-		String(propsData.rating)
+		String(propsData.vote_average)
 	);
 	expect(screen.getByTestId("duration")).toHaveTextContent(
-		propsData.duration
+		String(propsData.runtime)
 	);
 	expect(screen.getByTestId("genres")).toHaveTextContent(
 		propsData.genres.join(", ")
 	);
 	expect(screen.getByTestId("description")).toHaveTextContent(
-		propsData.description
+		propsData.overview
 	);
 });
 

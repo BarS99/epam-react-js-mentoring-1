@@ -2,11 +2,11 @@
 
 .genre-select {
 	display: inline-flex;
+	flex-wrap: wrap;
 	align-items: center;
 	list-style-type: none;
 	padding: 0;
-	gap: 1.875rem;
-	border-bottom: 0.1875rem solid variables.$secondary;
+	gap: 0.5rem 1.875rem;
 
 	&__item {
 		position: relative;

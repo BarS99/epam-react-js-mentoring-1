@@ -18,6 +18,7 @@
 		display: block;
 		width: 100%;
 		aspect-ratio: 322 / 455;
+		background-color: variables.$black;
 	}
 
 	&__header {
@@ -47,6 +48,7 @@
 		padding: 0.375rem 0.75rem;
 		border: 0.0625rem solid rgba(variables.$text, 0.5);
 		border-radius: 0.25rem;
+		white-space: nowrap;
 	}
 
 	&__genres {

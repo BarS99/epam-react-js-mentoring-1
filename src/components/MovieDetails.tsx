@@ -1,22 +1,12 @@
+import { MovieDetailsData } from "../interfaces/movie.interface";
 import styles from "./MovieDetails.module.scss";
 
 interface Props {
-	data: {
-		image: {
-			url: string;
-			altText: string;
-		};
-		name: string;
-		year: number;
-		rating: number;
-		duration: string;
-		genres: string[];
-		description: string;
-	};
-	orientation: "row" | "column";
+	data: MovieDetailsData;
+	orientation?: "row" | "column";
 }
 
-export const MovieDetails = ({ data, orientation }: Props) => {
+export const MovieDetails = ({ data, orientation = "row" }: Props) => {
 	return (
 		<article
 			className={[
@@ -24,11 +14,12 @@ export const MovieDetails = ({ data, orientation }: Props) => {
 				styles[`movie-details--${orientation}`],
 			].join(" ")}
 			data-testid="item"
+			data-cy="movie-details"
 		>
 			<img
 				className={styles["movie-details__image"]}
-				src={data.image.url}
-				alt={data.image.altText}
+				src={data.poster_path}
+				alt={data.title}
 				data-testid="image"
 			/>
 			<div className={styles["movie-details__content"]}>
@@ -38,14 +29,16 @@ export const MovieDetails = ({ data, orientation }: Props) => {
 							className={styles["movie-details__name"]}
 							data-testid="name"
 						>
-							{data.name}
+							{data.title}
 						</h1>
-						<p
-							className={styles["movie-details__rating"]}
-							data-testid="rating"
-						>
-							{data.rating}
-						</p>
+						{data.vote_average && (
+							<p
+								className={styles["movie-details__rating"]}
+								data-testid="rating"
+							>
+								{data.vote_average}
+							</p>
+						)}
 					</div>
 					<p
 						className={styles["movie-details__genres"]}
@@ -55,24 +48,26 @@ export const MovieDetails = ({ data, orientation }: Props) => {
 					</p>
 				</div>
 				<div className={styles["movie-details__info"]}>
-					<p
-						className={styles["movie-details__info-item"]}
-						data-testid="year"
-					>
-						{data.year}
-					</p>
+					{data.release_date && (
+						<p
+							className={styles["movie-details__info-item"]}
+							data-testid="release_date"
+						>
+							{data.release_date}
+						</p>
+					)}
 					<p
 						className={styles["movie-details__info-item"]}
 						data-testid="duration"
 					>
-						{data.duration}
+						{data.runtime} min
 					</p>
 				</div>
 				<div
 					className={styles["movie-details__description"]}
 					data-testid="description"
 				>
-					{data.description}
+					{data.overview}
 				</div>
 			</div>
 		</article>

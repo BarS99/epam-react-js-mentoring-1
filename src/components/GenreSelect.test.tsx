@@ -37,7 +37,7 @@ test("should highlight a selected genre passed in props", () => {
 
 	expect(
 		(
-			screen.getByTestId(`genre-${actionGenre}`) as HTMLButtonElement
+			screen.queryAllByTestId(`genre-button`)[0] as HTMLButtonElement
 		).classList.contains("genre-select__button--selected")
 	).toBe(true);
 });
@@ -53,9 +53,7 @@ test("should call onSelect with proper arguments after button click event", () =
 		/>
 	);
 
-	fireEvent.click(
-		screen.getByTestId(`genre-${actionGenre}`) as HTMLButtonElement
-	);
+	fireEvent.click(screen.queryAllByTestId(`genre-button`)[0] as HTMLButtonElement);
 
 	expect(onSelectStub).toHaveBeenCalledWith(actionGenre);
 });

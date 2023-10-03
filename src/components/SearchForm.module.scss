@@ -1,9 +1,9 @@
 @use "../assets/css/variables.module.scss" as variables;
 
 .search-form {
-	display: inline-flex;
-	height: 3.5rem;
-	width: 60.875rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
 	max-width: 100%;
 	gap: 0.875rem;
 
@@ -15,9 +15,12 @@
 		border-radius: 0.5rem;
 		font-size: 1.25rem;
 		color: variables.$text;
+		min-height: 3.5rem;
+		max-width: 100%;
 	}
 
 	button[type="submit"] {
-		width: 14.56rem;
+		max-width: 14.56rem;
+		width: 100%;
 	}
 }

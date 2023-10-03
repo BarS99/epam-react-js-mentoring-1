@@ -1,7 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
 import SortControl from "../components/SortControl";
 
-const options = ["Release date", "Title"];
+const options = [
+	{ id: '1', value: "Release Date" },
+	{ id: '2', value: "title" },
+];
 
 const meta: Meta<typeof SortControl> = {
 	title: "SortControl",
@@ -18,7 +21,7 @@ const meta: Meta<typeof SortControl> = {
 	},
 	args: {
 		options,
-		selection: "Release date",
+		selection: '1',
 	},
 };
 

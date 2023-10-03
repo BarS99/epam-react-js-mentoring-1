@@ -3,7 +3,10 @@
 .sort-control {
 	display: flex;
 	align-items: center;
-	gap: 2rem;
+	flex-wrap: wrap;
+	gap: 1.25rem 2rem;
+	padding-bottom: 1.25rem;
+	letter-spacing: 0.0625rem;
 
 	&__label {
 		color: rgba(variables.$text, 0.6);
@@ -17,6 +20,7 @@
 		text-transform: uppercase;
 		appearance: none;
 		padding-right: 3rem;
+		letter-spacing: 0.0625rem;
 	}
 
 	&__option {
@@ -35,7 +39,7 @@
 			position: absolute;
 			right: 0;
 			top: 50%;
-			transform: translateY(calc(-50% + 0.4rem));
+			transform: translateY(-50%);
 			width: 0;
 			height: 0;
 			border-left: 0.4rem solid transparent;
