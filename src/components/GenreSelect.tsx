@@ -20,6 +20,7 @@ const GenreSelect = ({ genres, selectedGenre, onSelect }: Props) => {
 						onClick={() => onSelect(genre)}
 						type="button"
 						data-testid="genre-button"
+						aria-pressed={genre === selectedGenre}
 					>
 						{genre}
 					</button>
