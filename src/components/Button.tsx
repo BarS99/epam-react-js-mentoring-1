@@ -5,7 +5,7 @@ interface Props {
 	children: ReactNode;
 	type?: "button" | "submit" | "reset";
 	color?: "primary" | "secondary" | "tertiary";
-	onClick?: () => {};
+	onClick?: () => void;
 }
 
 const Button = ({

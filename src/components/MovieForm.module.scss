@@ -127,6 +127,13 @@
 		max-width: 100%;
 	}
 
+	&__error {
+		margin-top: 0.25rem;
+		font-size: 0.875rem;
+		color: variables.$primary;
+		text-transform: initial;
+	}
+
 	&__footer {
 		display: flex;
 		justify-content: flex-end;

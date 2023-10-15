@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Container from "../../../components/Container";
 import styles from "./MovieListPage.module.scss";
 import SortControl from "../../../components/SortControl";
@@ -6,6 +6,7 @@ import GenreSelect from "../../../components/GenreSelect";
 import MovieTile from "../../../components/MovieTile";
 import {
 	MoviesQueryParams,
+	deleteMovie,
 	getGenres,
 	getMovies,
 	getSortOptions,
@@ -16,7 +17,6 @@ import {
 	ScrollRestoration,
 	useNavigate,
 	useOutletContext,
-	useParams,
 	useSearchParams,
 } from "react-router-dom";
 import { QueryParams } from "../../../interfaces/fetch.interface";
@@ -29,10 +29,9 @@ type MovieListPageContext = {
 
 const MovieListPage = () => {
 	const navigate = useNavigate();
-	const { movieId } = useParams();
 	const [searchParams, setSearchParams] = useSearchParams();
-	const genres = useMemo(getGenres, []);
-	const sortOptions = useMemo(getSortOptions, []);
+	const genres = useRef(getGenres());
+	const sortOptions = useRef(getSortOptions());
 	const [movies, setMovies] = useState<Movie[]>([]);
 	const [searchQuery, setSearchQuery] = useState(
 		searchParams.get(MoviesQueryParams.SEARCH_QUERY) ?? ""
@@ -41,7 +40,7 @@ const MovieListPage = () => {
 		searchParams.get(MoviesQueryParams.FILTER) ?? null
 	);
 	const [sort, setSort] = useState(
-		searchParams.get(MoviesQueryParams.SORT) ?? sortOptions[0].id
+		searchParams.get(MoviesQueryParams.SORT) ?? sortOptions.current[0].id
 	);
 	const setMoviesController = useRef<AbortController | null>(null);
 	const getQueryParams = useCallback(
@@ -67,6 +66,22 @@ const MovieListPage = () => {
 			setMovies([]);
 		}
 	}, []);
+	const [moviesBeingDeleted, setMoviesBeingDeleted] = useState<number[]>([]);
+
+	const handleMovieDelete = async (id: number) => {
+		setMoviesBeingDeleted((movies) => [...movies, id]);
+
+		const request = deleteMovie(id);
+
+		try {
+			await request.send();
+		} finally {
+			setMoviesBeingDeleted((movies) =>
+				movies.filter((movieId) => movieId !== id)
+			);
+			fetchAndSetMovies(getQueryParams());
+		}
+	};
 
 	useEffect(() => {
 		const queryParams = getQueryParams();
@@ -93,7 +108,7 @@ const MovieListPage = () => {
 				<div className={styles["movie-list-page__main-inner"]}>
 					<div className={styles["movie-list-page__controls"]}>
 						<GenreSelect
-							genres={genres}
+							genres={genres.current}
 							onSelect={(genre) =>
 								setSelectedGenre((currentGenre) =>
 									currentGenre === genre ? null : genre
@@ -102,7 +117,7 @@ const MovieListPage = () => {
 							selectedGenre={selectedGenre}
 						/>
 						<SortControl
-							options={sortOptions}
+							options={sortOptions.current}
 							selection={sort}
 							onChange={(selection) => setSort(selection)}
 						/>
@@ -115,9 +130,11 @@ const MovieListPage = () => {
 							<MovieTile
 								key={item.id}
 								data={item}
-								onClick={() =>
-									movieId !== item.id.toString() &&
-									navigate(item.id.toString())
+								onClick={() => navigate(`/${item.id}`)}
+								onEdit={() => navigate(`/edit/${item.id}`)}
+								onDelete={() =>
+									!moviesBeingDeleted.includes(item.id) &&
+									handleMovieDelete(item.id)
 								}
 							/>
 						))}

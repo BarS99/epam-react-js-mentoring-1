@@ -5,8 +5,10 @@ export interface QueryParams {
 }
 
 export interface FetchOptions {
-	queryParams?: QueryParams;
+	body?: any;
+	contentType?: string;
 	customSignal?: AbortSignal;
+	queryParams?: QueryParams;
 }
 
 export interface FetchResponse<T> {
