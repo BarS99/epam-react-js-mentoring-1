@@ -6,7 +6,6 @@ const App = () => {
 	return (
 		<div className={styles.app}>
 			<RouterProvider router={Router} />
-			<div id="root-dialog"></div>
 		</div>
 	);
 };

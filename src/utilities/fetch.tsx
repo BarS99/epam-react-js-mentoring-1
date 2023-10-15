@@ -5,13 +5,17 @@ import {
 	QueryParams,
 } from "../interfaces/fetch.interface";
 
-const handleFetchDataResponse = <T,>(response: Response): Promise<T> =>
-	response.ok
-		? response.json()
+const handleFetchDataResponse = async <T,>(response: Response): Promise<T> => {
+	const body = response.status === 204 ? null : await response.json();
+
+	return response.ok
+		? body
 		: Promise.reject({
 				status: response.status,
 				statusText: response.statusText,
+				body,
 		  });
+};
 
 const filterUndefinedAndNullParams = (
 	queryParams: QueryParams = {}
@@ -47,6 +51,26 @@ const mergeUrlAndParams = (url: string, params: QueryParams): string => {
 		: url;
 };
 
+const getHttpHeaders = ({
+	contentType,
+	body,
+}: {
+	contentType?: string;
+	body?: string;
+}): HeadersInit | undefined => {
+	if (contentType) {
+		return {
+			"Content-Type": contentType,
+		};
+	} else if (!contentType && body) {
+		return {
+			"Content-Type": "application/json",
+		};
+	} else {
+		return undefined;
+	}
+};
+
 const fetchData = async <T,>(
 	url: string,
 	method: string,
@@ -60,18 +84,39 @@ const fetchData = async <T,>(
 	const fetchResponse = await fetch(fetchUrl, {
 		method,
 		signal: options?.customSignal ?? controller.signal,
+		body: options?.body,
+		headers: getHttpHeaders({
+			body: options?.body,
+			contentType: options?.contentType,
+		}),
 	});
 
 	return handleFetchDataResponse<T>(fetchResponse);
 };
 
-export const getFetch = <T,>(url: string, options?: FetchOptions) => {
+export const getRequestControl = <T,>(
+	url: string,
+	method: string,
+	options?: FetchOptions
+) => {
 	const controller = new AbortController();
 
 	return {
-		send: () => fetchData<T>(url, "GET", controller, options),
+		send: () => fetchData<T>(url, method, controller, options),
 		getController: () => (options?.customSignal ? null : controller),
 	} as FetchResponse<T>;
 };
+
+export const getFetch = <T,>(url: string, options?: FetchOptions) =>
+	getRequestControl<T>(url, "GET", options);
+
+export const postFetch = <T,>(url: string, options?: FetchOptions) =>
+	getRequestControl<T>(url, "POST", options);
+
+export const putFetch = <T,>(url: string, options?: FetchOptions) =>
+	getRequestControl<T>(url, "PUT", options);
+
+export const deleteFetch = <T,>(url: string, options?: FetchOptions) =>
+	getRequestControl<T>(url, "DELETE", options);
 
 export const buildEndpoint = (path: string): string => `${HOST}/${path}`;

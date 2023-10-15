@@ -4,8 +4,10 @@ import Container from "../../../../components/Container";
 import SearchForm from "../../../../components/SearchForm";
 import { useMovieListPage } from "../MovieListPage";
 import MovieListPageHeader from "./MovieListPageHeader";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const MovieListPageSearch = () => {
+	const navigate = useNavigate();
 	const { searchQuery, setSearchQuery } = useMovieListPage();
 
 	return (
@@ -15,7 +17,14 @@ const MovieListPageSearch = () => {
 		>
 			<Container>
 				<MovieListPageHeader>
-					<Button color="tertiary">+ ADD MOVIE</Button>
+					<Button
+						color="tertiary"
+						onClick={() => {
+							navigate("new");
+						}}
+					>
+						+ ADD MOVIE
+					</Button>
 				</MovieListPageHeader>
 				<div className={styles["movie-list-page-search__content"]}>
 					<h1 className={styles["movie-list-page-search__title"]}>
@@ -27,6 +36,7 @@ const MovieListPageSearch = () => {
 					/>
 				</div>
 			</Container>
+			<Outlet />
 		</section>
 	);
 };

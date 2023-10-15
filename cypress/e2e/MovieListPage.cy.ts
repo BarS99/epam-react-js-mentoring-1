@@ -20,7 +20,7 @@ describe("MovieListPage", () => {
 		});
 
 		it("movie details logic should work correctly", () => {
-			cy.intercept("GET", "movies/*", {
+			cy.intercept("GET", "movies/337167", {
 				fixture: "movie/movie.json",
 			}).as("getMovieDetails");
 
@@ -117,6 +117,7 @@ describe("MovieListPage", () => {
 				}
 			).as("getMoviesSort");
 
+			cy.wait(50);
 			cy.get("[data-cy=sort-control] [data-testid=select]").select(
 				"release_date"
 			);
@@ -145,5 +146,113 @@ describe("MovieListPage", () => {
 		cy.get(
 			"[data-cy=genre-select] [data-testid=genre-button][aria-pressed=true]"
 		).contains("Fantasy");
+	});
+
+	describe("movie form modal", () => {
+		beforeEach(() => {
+			cy.visit("http://localhost:3000/");
+			cy.wait("@getMovies");
+		});
+
+		it("should open add movie form", () => {
+			const movieFormSelector = "[data-cy=dialog] [data-cy=movie-form]";
+			cy.get(movieFormSelector).should("not.exist");
+
+			cy.get("[data-cy=movie-list-page-header] button").trigger("click");
+
+			cy.get(movieFormSelector).should("exist");
+			cy.get(`${movieFormSelector} [data-testid=title]`).should(
+				"have.value",
+				""
+			);
+			cy.get(`${movieFormSelector} [data-testid=release_date]`).should(
+				"have.value",
+				""
+			);
+			cy.get(`${movieFormSelector} [data-testid=poster_path]`).should(
+				"have.value",
+				""
+			);
+			cy.get(`${movieFormSelector} [data-testid=vote_average]`).should(
+				"have.value",
+				""
+			);
+			cy.get(`${movieFormSelector} [data-testid=genre]`).should(
+				"have.value",
+				""
+			);
+			cy.get(`${movieFormSelector} [data-testid=runtime]`).should(
+				"have.value",
+				""
+			);
+			cy.get(`${movieFormSelector} [data-testid=overview]`).should(
+				"have.value",
+				""
+			);
+		});
+
+		it("should open edit movie form and add movie on submit", () => {
+			cy.intercept({
+				method: "PUT",
+				pathname: "movies",
+			}).as("putMovie");
+
+			const movieFormSelector = "[data-cy=dialog] [data-cy=movie-form]";
+			cy.get(movieFormSelector).should("not.exist");
+
+			cy.get("[data-cy=movie-tile]")
+				.first()
+				.find("[data-testid=context-open]")
+				.trigger("click");
+			cy.get("[data-cy=movie-tile]")
+				.first()
+				.find("[data-testid=context] [data-testid=edit]")
+				.trigger("click");
+
+			cy.intercept("GET", "movies/337167", {
+				fixture: "movie/movie.json",
+			}).as("getMovieDetails");
+			cy.wait("@getMovieDetails");
+
+			cy.get(movieFormSelector).should("exist");
+
+			cy.get(movieFormSelector).should("exist");
+			cy.get(`${movieFormSelector} [data-testid=title]`).should(
+				"have.value",
+				"Fifty Shades Freed"
+			);
+			cy.get(`${movieFormSelector} [data-testid=release_date]`).should(
+				"have.value",
+				"2018-02-07"
+			);
+			cy.get(`${movieFormSelector} [data-testid=poster_path]`).should(
+				"have.value",
+				"https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg"
+			);
+			cy.get(`${movieFormSelector} [data-testid=vote_average]`).should(
+				"have.value",
+				"6.1"
+			);
+			cy.get(`${movieFormSelector} [data-testid=genre]`).should(
+				"have.value",
+				"Drama, Romance"
+			);
+			cy.get(`${movieFormSelector} [data-testid=runtime]`).should(
+				"have.value",
+				"106"
+			);
+			cy.get(`${movieFormSelector} [data-testid=overview]`).should(
+				"have.value",
+				"Believing they have left behind shadowy..."
+			);
+
+			cy.get(movieFormSelector).submit();
+
+			cy.wait("@putMovie");
+
+			cy.get(
+				"[data-cy=dialog] [data-cy=movie-list-page-add__success]"
+			).should("exist");
+		});
 	});
 });
