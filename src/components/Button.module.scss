@@ -10,13 +10,19 @@
 	color: variables.$text;
 	font-size: 1.25rem;
 	line-height: 1.2;
-	padding: 0.9375rem 2.375rem; 
+	padding: 0.9375rem 2.375rem;
 	cursor: pointer;
 	border: 0.0625rem solid variables.$primary;
 	min-width: 11.25rem;
 
 	&--secondary {
 		background-color: transparent;
+		color: variables.$primary;
+	}
+
+	&--tertiary {
+		border-color: transparent;
+		background-color: rgb(96, 96, 96, 0.68);
 		color: variables.$primary;
 	}
 }

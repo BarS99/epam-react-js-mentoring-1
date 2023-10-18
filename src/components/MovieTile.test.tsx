@@ -1,15 +1,16 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import MovieTile from "./MovieTile";
+import { Movie } from "../interfaces/movie.interface";
 
 const propsData = {
-	image: {
-		url: "image-url",
-		altText: "image-alt",
-	},
-	name: "Pulp Fiction",
-	year: 2004,
 	genres: ["action", "crime"],
-};
+	id: 123,
+	overview: "",
+	poster_path: "image-url",
+	release_date: "2004",
+	runtime: 123,
+	title: "Pulp Fiction",
+} as Movie;
 const onClickStub = jest.fn();
 
 test("should render the component with given data", () => {
@@ -17,16 +18,16 @@ test("should render the component with given data", () => {
 
 	const image = screen.getByTestId("image");
 
-	expect(image).toHaveAttribute("src", propsData.image.url);
-	expect(image).toHaveAttribute("alt", propsData.image.altText);
-	expect(screen.getByTestId("name")).toHaveTextContent(propsData.name);
+	expect(image).toHaveAttribute("src", propsData.poster_path);
+	expect(image).toHaveAttribute("alt", propsData.title);
+	expect(screen.getByTestId("name")).toHaveTextContent(propsData.title);
 	expect(screen.getByTestId("year")).toHaveTextContent(
-		String(propsData.year)
+		propsData.release_date ?? ""
 	);
 	expect(screen.getByTestId("genres")).toHaveTextContent(
 		propsData.genres.join(", ")
 	);
-	expect(screen.getByTestId("link")).toHaveTextContent(propsData.name);
+	expect(screen.getByTestId("link")).toHaveTextContent(propsData.title);
 });
 
 test("should execute a callback when clicked", () => {

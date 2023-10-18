@@ -8,7 +8,7 @@ interface Props {
 
 const GenreSelect = ({ genres, selectedGenre, onSelect }: Props) => {
 	return (
-		<ul className={styles["genre-select"]}>
+		<ul className={styles["genre-select"]} data-cy="genre-select">
 			{genres.map((genre) => (
 				<li className={styles["genre-select__item"]} key={genre}>
 					<button
@@ -19,7 +19,7 @@ const GenreSelect = ({ genres, selectedGenre, onSelect }: Props) => {
 						].join(" ")}
 						onClick={() => onSelect(genre)}
 						type="button"
-						data-testid={`genre-${genre}`}
+						data-testid="genre-button"
 					>
 						{genre}
 					</button>

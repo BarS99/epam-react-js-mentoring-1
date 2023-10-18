@@ -3,8 +3,8 @@ import styles from "./Button.module.scss";
 
 interface Props {
 	children: ReactNode;
-	type: "button" | "submit" | "reset";
-	color?: "primary" | "secondary";
+	type?: "button" | "submit" | "reset";
+	color?: "primary" | "secondary" | "tertiary";
 	onClick?: () => {};
 }
 

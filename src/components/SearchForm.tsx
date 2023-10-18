@@ -30,6 +30,7 @@ const SearchForm = ({ initSearchQuery, onSearch }: Props) => {
 			ref={formRef}
 			className={styles["search-form"]}
 			onSubmit={handleCallback}
+			data-cy="search-form"
 			data-testid="form"
 		>
 			<input
@@ -40,7 +41,9 @@ const SearchForm = ({ initSearchQuery, onSearch }: Props) => {
 				placeholder="Search..."
 				data-testid="input"
 			/>
-			<Button type="submit">Search</Button>
+			<Button type="submit" data-testid="submit">
+				Search
+			</Button>
 		</form>
 	);
 };
