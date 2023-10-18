@@ -1,0 +1,50 @@
+@use "../../../assets/css/variables.module.scss" as variables;
+
+.movie-list-page {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	flex-grow: 1;
+
+	&__main {
+		flex-grow: 1;
+		padding: 1.25rem 0 4.625rem;
+		border-top: 0.0625rem solid #888;
+	}
+
+	&__main-inner {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		gap: 1.5rem 0;
+	}
+
+	&__controls {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1.25rem;
+		border-bottom: 0.1875rem solid variables.$secondary;
+	}
+
+	&__count {
+		font-size: 1.25rem;
+	}
+
+	&__list {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+
+		@media screen and (min-width: variables.$breakpoint) {
+			grid-template-columns: 1fr 1fr 1fr;
+			gap: 3.5rem;
+		}
+	}
+
+	&__footer {
+		background-color: variables.$secondary;
+		text-align: center;
+		padding: 1.5rem 0;
+	}
+}

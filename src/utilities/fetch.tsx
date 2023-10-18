@@ -59,7 +59,7 @@ const fetchData = async <T,>(
 
 	const fetchResponse = await fetch(fetchUrl, {
 		method,
-		signal: controller.signal,
+		signal: options?.customSignal ?? controller.signal,
 	});
 
 	return handleFetchDataResponse<T>(fetchResponse);
@@ -70,7 +70,7 @@ export const getFetch = <T,>(url: string, options?: FetchOptions) => {
 
 	return {
 		send: () => fetchData<T>(url, "GET", controller, options),
-		getController: () => controller,
+		getController: () => (options?.customSignal ? null : controller),
 	} as FetchResponse<T>;
 };
 
