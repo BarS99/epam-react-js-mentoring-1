@@ -1,0 +1,7 @@
+@use "../assets/css/variables.module.scss" as variables;
+
+.logo {
+	color: variables.$primary;
+	font-size: 1.25rem;
+	font-weight: 500;
+}

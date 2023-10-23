@@ -168,6 +168,17 @@ select {
 	vertical-align: middle;
 }
 
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+	&,
+	&:hover,
+	&:focus {
+		-webkit-text-fill-color: #fff;
+		-webkit-box-shadow: 0 0 0px 1000px variables.$tertiary inset;
+	}
+}
+
 strong,
 b {
 	font-weight: 700;
@@ -183,6 +194,12 @@ button {
 	line-height: 1.2;
 	color: inherit;
 	box-sizing: border-box;
+}
+
+#root-dialog {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
 }
 
 html {

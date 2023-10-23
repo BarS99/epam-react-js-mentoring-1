@@ -21,7 +21,7 @@ const Dialog = ({
 	return createPortal(
 		<>
 			<div className={styles["dialog__backdrop"]}></div>
-			<div className={styles["dialog"]}>
+			<div className={styles["dialog"]} data-cy="dialog">
 				<Container>
 					<FocusTrap
 						focusTrapOptions={{

@@ -1,0 +1,35 @@
+.movie-list-page-add {
+	&__error {
+		font-size: 1rem;
+		margin-bottom: 1rem;
+		text-transform: uppercase;
+	}
+
+	&__success {
+		text-align: center;
+	}
+
+	&__success-image {
+		width: 4.125rem;
+		height: 4.125rem;
+		margin: 0 auto 2rem;
+
+		img {
+			display: block;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	}
+
+	&__success-title {
+		font-size: 2.5rem;
+		text-transform: uppercase;
+		font-weight: 400;
+		margin-bottom: 2rem;
+	}
+
+	&__success-text {
+		font-size: 1.25rem;
+		font-weight: 400;
+	}
+}

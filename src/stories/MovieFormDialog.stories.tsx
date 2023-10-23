@@ -37,13 +37,13 @@ export const AddMovie: Story = {
 export const EditMovie: Story = {
 	args: {
 		data: {
-			date: "2004-01-01",
-			selectedGenres: ["Action", "Crime"],
+			release_date: "2004-01-01",
+			genres: ["Action", "Crime"],
 			overview: `Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men...`,
-			rating: "8.9",
+			vote_average: "8.9",
 			runtime: "2h 34min",
 			title: "Pulp Fiction",
-			url: "https://www.imdb.com/title/tt0110912/",
+			poster_path: "https://www.imdb.com/title/tt0110912/",
 		},
 	},
 };
