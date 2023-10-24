@@ -1,0 +1,10 @@
+.app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/*# sourceMappingURL=App.module.css.map */

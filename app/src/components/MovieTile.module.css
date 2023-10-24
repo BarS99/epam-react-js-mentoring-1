@@ -1,0 +1,118 @@
+.movie-tile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.5rem;
+  position: relative;
+}
+.movie-tile__link {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.movie-tile__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 322/455;
+  background-color: #000000;
+}
+.movie-tile__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.movie-tile__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.7);
+}
+.movie-tile__name {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+.movie-tile__year {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 300;
+  padding: 0.375rem 0.75rem;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.25rem;
+  white-space: nowrap;
+}
+.movie-tile__genres {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+.movie-tile__context-open {
+  display: flex;
+  opacity: 0;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  background-color: #323232;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+.movie-tile__context-open:focus {
+  opacity: 1;
+}
+.movie-tile:hover .movie-tile__context-open {
+  opacity: 1;
+}
+.movie-tile__context-dot {
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+.movie-tile__context {
+  position: absolute;
+  width: 11.875rem;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 0.25rem;
+  background-color: #323232;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0.5rem 0;
+}
+.movie-tile__context-close {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  margin: 0 0.5rem 0.5rem;
+}
+.movie-tile__context-list {
+  display: block;
+  width: 100%;
+  list-style: none;
+}
+.movie-tile__context-link {
+  display: block;
+  width: 100%;
+  text-align: start;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  list-style: none;
+  padding: 0.5rem 1.5rem;
+}
+.movie-tile__context-link:hover {
+  background-color: #f65261;
+}
+
+/*# sourceMappingURL=MovieTile.module.css.map */

@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  padding-inline: 2rem;
+  max-width: 1084px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    padding-inline: 3.75rem;
+  }
+}
+
+/*# sourceMappingURL=Container.module.css.map */

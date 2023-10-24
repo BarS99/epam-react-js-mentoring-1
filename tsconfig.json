@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "ES2015",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"types": ["cypress", "node"],
 		"allowJs": true,
@@ -17,5 +17,5 @@
 		"noEmit": true,
 		"jsx": "react-jsx"
 	},
-	"include": ["src", "**/*.ts"],
+	"include": ["src", "app", "**/*.ts", "app/entry.server.tsx", "app/routes/.new._index.tsx"],
 }

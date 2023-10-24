@@ -1,4 +1,4 @@
-import { MoviesQueryParams } from "../../src/repositories/movies";
+import { MoviesQueryParams } from "../../app/src/interfaces/movie.interface";
 
 describe("MovieListPage", () => {
 	beforeEach(() => {

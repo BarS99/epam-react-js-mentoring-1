@@ -1,0 +1,47 @@
+.sort-control {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+  padding-bottom: 1.25rem;
+  letter-spacing: 0.0625rem;
+}
+.sort-control__label {
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+.sort-control__select {
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  text-transform: uppercase;
+  appearance: none;
+  padding-right: 3rem;
+  letter-spacing: 0.0625rem;
+}
+.sort-control__option {
+  background-color: #232323;
+}
+.sort-control__select-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+.sort-control__select-wrapper::after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 0.4rem solid transparent;
+  border-right: 0.4rem solid transparent;
+  border-top: 0.4rem solid #f65261;
+  border-radius: 0.25rem;
+  pointer-events: none;
+}
+
+/*# sourceMappingURL=SortControl.module.css.map */
