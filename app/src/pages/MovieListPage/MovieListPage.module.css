@@ -1,0 +1,45 @@
+.movie-list-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1;
+}
+.movie-list-page__main {
+  flex-grow: 1;
+  padding: 1.25rem 0 4.625rem;
+  border-top: 0.0625rem solid #888;
+}
+.movie-list-page__main-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.5rem 0;
+}
+.movie-list-page__controls {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  border-bottom: 0.1875rem solid #424242;
+}
+.movie-list-page__count {
+  font-size: 1.25rem;
+}
+.movie-list-page__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .movie-list-page__list {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3.5rem;
+  }
+}
+.movie-list-page__footer {
+  background-color: #424242;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+/*# sourceMappingURL=MovieListPage.module.css.map */
